@@ -94,7 +94,6 @@ public class PlayerHealth : MonoBehaviour
             renderer.enabled = true;
         }
 
-        // Re-enable collider
         var collider = GetComponent<Collider>();
         if (collider != null)
         {

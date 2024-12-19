@@ -13,7 +13,7 @@ public class FPSController : MonoBehaviour
     [SerializeField] private Camera camera;
     [SerializeField] private float xCameraBounds = 60f;
     [SerializeField] private float jumpForce = 20f;
-    [SerializeField] private float gravity = -2f;
+    [SerializeField] private float gravity = -9.8f;
     private bool isGrounded;
 
     #region Smoothing code
@@ -44,19 +44,14 @@ public class FPSController : MonoBehaviour
           
             isGrounded = _controller.isGrounded;
 
-            if (isGrounded && _moveVector.y < 0)
-            {
-                _moveVector.y = -2f; 
-            }
-
             if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             {
                 Jump();
             }
-
             _moveVector.y += gravity * Time.deltaTime;
-
             _controller.Move(_moveVector * Time.deltaTime);
+
+
         }
     }
 
@@ -83,6 +78,7 @@ public class FPSController : MonoBehaviour
     void Jump()
     {
         _moveVector.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+       
     }
 
     private void LateUpdate()
